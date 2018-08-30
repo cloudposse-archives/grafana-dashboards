@@ -1,5 +1,5 @@
 {
-  "__inputs": [
+  "inputs": [
     {
       "description": "",
       "label": "prometheus",
