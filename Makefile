@@ -15,9 +15,15 @@ KUBE_PROMETHEUS_DASHBOARDS += statefulset-dashboard.json
 export DS_PROMETHEUS ?= Prometheus
 
 ## Write chamber secrets for agent
-apply:
+kube-prometheus/apply:
 	@mkdir -p ./kube-prometheus
 	@for dashboard_file in $(KUBE_PROMETHEUS_DASHBOARDS) ; do \
 		echo "Fetching kube-prometheus $$dashboard_file version $(KUBE_PROMETHEUS_VERSION)"; \
 		curl -s $(KUBE_PROMETHEUS_BASE_URL)/$$dashboard_file | jq .dashboard | envsubst > ./kube-prometheus/$$dashboard_file ; \
 	done
+
+
+## Write chamber secrets for agent
+nginx/apply:
+	@mkdir -p ./nginx-ingress
+	@curl -s https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.yaml | envsubst > ./nginx-ingress/nginx.json
