@@ -67,7 +67,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "100 - (avg by (cpu) (irate(node_cpu{mode=\"idle\", instance=\"\"}[5m])) * 100)",
+              "expr": "100 - (avg by (cpu) (irate(node_cpu{mode=\"idle\", instance=\"$server\"}[5m])) * 100)",
               "hide": false,
               "intervalFactor": 10,
               "legendFormat": "{{cpu}}",
@@ -146,7 +146,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_load1{instance=\"\"}",
+              "expr": "node_load1{instance=\"$server\"}",
               "intervalFactor": 4,
               "legendFormat": "load 1m",
               "refId": "A",
@@ -154,7 +154,7 @@
               "target": ""
             },
             {
-              "expr": "node_load5{instance=\"\"}",
+              "expr": "node_load5{instance=\"$server\"}",
               "intervalFactor": 4,
               "legendFormat": "load 5m",
               "refId": "B",
@@ -162,7 +162,7 @@
               "target": ""
             },
             {
-              "expr": "node_load15{instance=\"\"}",
+              "expr": "node_load15{instance=\"$server\"}",
               "intervalFactor": 4,
               "legendFormat": "load 15m",
               "refId": "C",
@@ -253,7 +253,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_MemTotal{instance=\"\"} - node_memory_MemFree{instance=\"\"} - node_memory_Buffers{instance=\"\"} - node_memory_Cached{instance=\"\"}",
+              "expr": "node_memory_MemTotal{instance=\"$server\"} - node_memory_MemFree{instance=\"$server\"} - node_memory_Buffers{instance=\"$server\"} - node_memory_Cached{instance=\"$server\"}",
               "hide": false,
               "interval": "",
               "intervalFactor": 2,
@@ -263,7 +263,7 @@
               "step": 10
             },
             {
-              "expr": "node_memory_Buffers{instance=\"\"}",
+              "expr": "node_memory_Buffers{instance=\"$server\"}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "memory buffers",
@@ -272,7 +272,7 @@
               "step": 10
             },
             {
-              "expr": "node_memory_Cached{instance=\"\"}",
+              "expr": "node_memory_Cached{instance=\"$server\"}",
               "intervalFactor": 2,
               "legendFormat": "memory cached",
               "metric": "",
@@ -280,7 +280,7 @@
               "step": 10
             },
             {
-              "expr": "node_memory_MemFree{instance=\"\"}",
+              "expr": "node_memory_MemFree{instance=\"$server\"}",
               "intervalFactor": 2,
               "legendFormat": "memory free",
               "metric": "",
@@ -369,7 +369,7 @@
           },
           "targets": [
             {
-              "expr": "((node_memory_MemTotal{instance=\"\"} - node_memory_MemFree{instance=\"\"}  - node_memory_Buffers{instance=\"\"} - node_memory_Cached{instance=\"\"}) / node_memory_MemTotal{instance=\"\"}) * 100",
+              "expr": "((node_memory_MemTotal{instance=\"$server\"} - node_memory_MemFree{instance=\"$server\"}  - node_memory_Buffers{instance=\"$server\"} - node_memory_Cached{instance=\"$server\"}) / node_memory_MemTotal{instance=\"$server\"}) * 100",
               "intervalFactor": 2,
               "refId": "A",
               "step": 60,
@@ -455,7 +455,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (instance) (rate(node_disk_bytes_read{instance=\"\"}[2m]))",
+              "expr": "sum by (instance) (rate(node_disk_bytes_read{instance=\"$server\"}[2m]))",
               "hide": false,
               "intervalFactor": 4,
               "legendFormat": "read",
@@ -464,14 +464,14 @@
               "target": ""
             },
             {
-              "expr": "sum by (instance) (rate(node_disk_bytes_written{instance=\"\"}[2m]))",
+              "expr": "sum by (instance) (rate(node_disk_bytes_written{instance=\"$server\"}[2m]))",
               "intervalFactor": 4,
               "legendFormat": "written",
               "refId": "B",
               "step": 20
             },
             {
-              "expr": "sum by (instance) (rate(node_disk_io_time_ms{instance=\"\"}[2m]))",
+              "expr": "sum by (instance) (rate(node_disk_io_time_ms{instance=\"$server\"}[2m]))",
               "intervalFactor": 4,
               "legendFormat": "io time",
               "refId": "C",
@@ -558,7 +558,7 @@
           },
           "targets": [
             {
-              "expr": "(sum(node_filesystem_size{device!=\"rootfs\",instance=\"\"}) - sum(node_filesystem_free{device!=\"rootfs\",instance=\"\"})) / sum(node_filesystem_size{device!=\"rootfs\",instance=\"\"})",
+              "expr": "(sum(node_filesystem_size{device!=\"rootfs\",instance=\"$server\"}) - sum(node_filesystem_free{device!=\"rootfs\",instance=\"$server\"})) / sum(node_filesystem_size{device!=\"rootfs\",instance=\"$server\"})",
               "intervalFactor": 2,
               "refId": "A",
               "step": 60,
@@ -636,7 +636,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(node_network_receive_bytes{instance=\"\",device!~\"lo\"}[5m])",
+              "expr": "rate(node_network_receive_bytes{instance=\"$server\",device!~\"lo\"}[5m])",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "{{device}}",
@@ -718,7 +718,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(node_network_transmit_bytes{instance=\"\",device!~\"lo\"}[5m])",
+              "expr": "rate(node_network_transmit_bytes{instance=\"$server\",device!~\"lo\"}[5m])",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "{{device}}",
