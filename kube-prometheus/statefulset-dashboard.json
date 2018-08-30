@@ -29,7 +29,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -74,7 +74,7 @@
           },
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"$statefulset_namespace\",pod_name=~\"$statefulset_name.*\"}[3m]))",
+              "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"\",pod_name=~\".*\"}[3m]))",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -100,7 +100,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -145,7 +145,7 @@
           },
           "targets": [
             {
-              "expr": "sum(container_memory_usage_bytes{namespace=\"$statefulset_namespace\",pod_name=~\"$statefulset_name.*\"}) / 1024^3",
+              "expr": "sum(container_memory_usage_bytes{namespace=\"\",pod_name=~\".*\"}) / 1024^3",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -171,7 +171,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "Bps",
           "gauge": {
@@ -216,7 +216,7 @@
           },
           "targets": [
             {
-              "expr": "sum(rate(container_network_transmit_bytes_total{namespace=\"$statefulset_namespace\",pod_name=~\"$statefulset_name.*\"}[3m])) + sum(rate(container_network_receive_bytes_total{namespace=\"$statefulset_namespace\",pod_name=~\"$statefulset_name.*\"}[3m]))",
+              "expr": "sum(rate(container_network_transmit_bytes_total{namespace=\"\",pod_name=~\".*\"}[3m])) + sum(rate(container_network_receive_bytes_total{namespace=\"\",pod_name=~\".*\"}[3m]))",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -251,7 +251,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -295,7 +295,7 @@
           },
           "targets": [
             {
-              "expr": "max(kube_statefulset_replicas{statefulset=\"$statefulset_name\",namespace=\"$statefulset_namespace\"}) without (instance, pod)",
+              "expr": "max(kube_statefulset_replicas{statefulset=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "metric": "kube_statefulset_replicas",
               "refId": "A",
@@ -322,7 +322,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -366,7 +366,7 @@
           },
           "targets": [
             {
-              "expr": "min(kube_statefulset_status_replicas{statefulset=\"$statefulset_name\",namespace=\"$statefulset_namespace\"}) without (instance, pod)",
+              "expr": "min(kube_statefulset_status_replicas{statefulset=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -392,7 +392,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -436,7 +436,7 @@
           },
           "targets": [
             {
-              "expr": "max(kube_statefulset_status_observed_generation{statefulset=\"$statefulset_name\",namespace=\"$statefulset_namespace\"}) without (instance, pod)",
+              "expr": "max(kube_statefulset_status_observed_generation{statefulset=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -462,7 +462,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -506,7 +506,7 @@
           },
           "targets": [
             {
-              "expr": "max(kube_statefulset_metadata_generation{statefulset=\"$statefulset_name\",namespace=\"$statefulset_namespace\"}) without (instance, pod)",
+              "expr": "max(kube_statefulset_metadata_generation{statefulset=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -538,7 +538,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -575,14 +575,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "min(kube_statefulset_status_replicas{statefulset=\"$statefulset_name\",namespace=\"$statefulset_namespace\"}) without (instance, pod)",
+              "expr": "min(kube_statefulset_status_replicas{statefulset=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "legendFormat": "available",
               "refId": "B",
               "step": 30
             },
             {
-              "expr": "max(kube_statefulset_replicas{statefulset=\"$statefulset_name\",namespace=\"$statefulset_namespace\"}) without (instance, pod)",
+              "expr": "max(kube_statefulset_replicas{statefulset=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "legendFormat": "desired",
               "refId": "E",
@@ -632,7 +632,7 @@
       {
         "allValue": ".*",
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "prometheus",
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
@@ -652,14 +652,14 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "prometheus",
         "hide": 0,
         "includeAll": false,
         "label": "StatefulSet",
         "multi": false,
         "name": "statefulset_name",
         "options": [],
-        "query": "label_values(kube_statefulset_metadata_generation{namespace=\"$statefulset_namespace\"}, statefulset)",
+        "query": "label_values(kube_statefulset_metadata_generation{namespace=\"\"}, statefulset)",
         "refresh": 1,
         "regex": "",
         "sort": 0,

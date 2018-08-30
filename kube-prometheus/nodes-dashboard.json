@@ -30,7 +30,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -67,7 +67,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "100 - (avg by (cpu) (irate(node_cpu{mode=\"idle\", instance=\"$server\"}[5m])) * 100)",
+              "expr": "100 - (avg by (cpu) (irate(node_cpu{mode=\"idle\", instance=\"\"}[5m])) * 100)",
               "hide": false,
               "intervalFactor": 10,
               "legendFormat": "{{cpu}}",
@@ -109,7 +109,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -146,7 +146,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_load1{instance=\"$server\"}",
+              "expr": "node_load1{instance=\"\"}",
               "intervalFactor": 4,
               "legendFormat": "load 1m",
               "refId": "A",
@@ -154,7 +154,7 @@
               "target": ""
             },
             {
-              "expr": "node_load5{instance=\"$server\"}",
+              "expr": "node_load5{instance=\"\"}",
               "intervalFactor": 4,
               "legendFormat": "load 5m",
               "refId": "B",
@@ -162,7 +162,7 @@
               "target": ""
             },
             {
-              "expr": "node_load15{instance=\"$server\"}",
+              "expr": "node_load15{instance=\"\"}",
               "intervalFactor": 4,
               "legendFormat": "load 15m",
               "refId": "C",
@@ -211,7 +211,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -253,7 +253,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "node_memory_MemTotal{instance=\"$server\"} - node_memory_MemFree{instance=\"$server\"} - node_memory_Buffers{instance=\"$server\"} - node_memory_Cached{instance=\"$server\"}",
+              "expr": "node_memory_MemTotal{instance=\"\"} - node_memory_MemFree{instance=\"\"} - node_memory_Buffers{instance=\"\"} - node_memory_Cached{instance=\"\"}",
               "hide": false,
               "interval": "",
               "intervalFactor": 2,
@@ -263,7 +263,7 @@
               "step": 10
             },
             {
-              "expr": "node_memory_Buffers{instance=\"$server\"}",
+              "expr": "node_memory_Buffers{instance=\"\"}",
               "interval": "",
               "intervalFactor": 2,
               "legendFormat": "memory buffers",
@@ -272,7 +272,7 @@
               "step": 10
             },
             {
-              "expr": "node_memory_Cached{instance=\"$server\"}",
+              "expr": "node_memory_Cached{instance=\"\"}",
               "intervalFactor": 2,
               "legendFormat": "memory cached",
               "metric": "",
@@ -280,7 +280,7 @@
               "step": 10
             },
             {
-              "expr": "node_memory_MemFree{instance=\"$server\"}",
+              "expr": "node_memory_MemFree{instance=\"\"}",
               "intervalFactor": 2,
               "legendFormat": "memory free",
               "metric": "",
@@ -323,7 +323,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "percent",
           "gauge": {
@@ -369,7 +369,7 @@
           },
           "targets": [
             {
-              "expr": "((node_memory_MemTotal{instance=\"$server\"} - node_memory_MemFree{instance=\"$server\"}  - node_memory_Buffers{instance=\"$server\"} - node_memory_Cached{instance=\"$server\"}) / node_memory_MemTotal{instance=\"$server\"}) * 100",
+              "expr": "((node_memory_MemTotal{instance=\"\"} - node_memory_MemFree{instance=\"\"}  - node_memory_Buffers{instance=\"\"} - node_memory_Cached{instance=\"\"}) / node_memory_MemTotal{instance=\"\"}) * 100",
               "intervalFactor": 2,
               "refId": "A",
               "step": 60,
@@ -405,7 +405,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -455,7 +455,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum by (instance) (rate(node_disk_bytes_read{instance=\"$server\"}[2m]))",
+              "expr": "sum by (instance) (rate(node_disk_bytes_read{instance=\"\"}[2m]))",
               "hide": false,
               "intervalFactor": 4,
               "legendFormat": "read",
@@ -464,14 +464,14 @@
               "target": ""
             },
             {
-              "expr": "sum by (instance) (rate(node_disk_bytes_written{instance=\"$server\"}[2m]))",
+              "expr": "sum by (instance) (rate(node_disk_bytes_written{instance=\"\"}[2m]))",
               "intervalFactor": 4,
               "legendFormat": "written",
               "refId": "B",
               "step": 20
             },
             {
-              "expr": "sum by (instance) (rate(node_disk_io_time_ms{instance=\"$server\"}[2m]))",
+              "expr": "sum by (instance) (rate(node_disk_io_time_ms{instance=\"\"}[2m]))",
               "intervalFactor": 4,
               "legendFormat": "io time",
               "refId": "C",
@@ -512,7 +512,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "percentunit",
           "gauge": {
@@ -558,7 +558,7 @@
           },
           "targets": [
             {
-              "expr": "(sum(node_filesystem_size{device!=\"rootfs\",instance=\"$server\"}) - sum(node_filesystem_free{device!=\"rootfs\",instance=\"$server\"})) / sum(node_filesystem_size{device!=\"rootfs\",instance=\"$server\"})",
+              "expr": "(sum(node_filesystem_size{device!=\"rootfs\",instance=\"\"}) - sum(node_filesystem_free{device!=\"rootfs\",instance=\"\"})) / sum(node_filesystem_size{device!=\"rootfs\",instance=\"\"})",
               "intervalFactor": 2,
               "refId": "A",
               "step": 60,
@@ -594,7 +594,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -636,7 +636,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(node_network_receive_bytes{instance=\"$server\",device!~\"lo\"}[5m])",
+              "expr": "rate(node_network_receive_bytes{instance=\"\",device!~\"lo\"}[5m])",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "{{device}}",
@@ -676,7 +676,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -718,7 +718,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(node_network_transmit_bytes{instance=\"$server\",device!~\"lo\"}[5m])",
+              "expr": "rate(node_network_transmit_bytes{instance=\"\",device!~\"lo\"}[5m])",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "{{device}}",
@@ -768,7 +768,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "prometheus",
         "hide": 0,
         "includeAll": false,
         "label": null,

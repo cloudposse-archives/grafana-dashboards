@@ -9,20 +9,6 @@
       "type": "datasource"
     }
   ],
-  "__requires": [
-    {
-      "type": "panel",
-      "id": "graph",
-      "name": "Graph",
-      "version": ""
-    },
-    {
-      "type": "datasource",
-      "id": "prometheus",
-      "name": "Prometheus",
-      "version": "1.0.0"
-    }
-  ],
   "annotations": {
     "list": []
   },
@@ -43,7 +29,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -88,7 +74,7 @@
           },
           "targets": [
             {
-              "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"$deployment_namespace\",pod_name=~\"$deployment_name.*\"}[3m]))",
+              "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"\",pod_name=~\".*\"}[3m]))",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -114,7 +100,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -159,7 +145,7 @@
           },
           "targets": [
             {
-              "expr": "sum(container_memory_usage_bytes{namespace=\"$deployment_namespace\",pod_name=~\"$deployment_name.*\"}) / 1024^3",
+              "expr": "sum(container_memory_usage_bytes{namespace=\"\",pod_name=~\".*\"}) / 1024^3",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -185,7 +171,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "Bps",
           "gauge": {
@@ -230,7 +216,7 @@
           },
           "targets": [
             {
-              "expr": "sum(rate(container_network_transmit_bytes_total{namespace=\"$deployment_namespace\",pod_name=~\"$deployment_name.*\"}[3m])) + sum(rate(container_network_receive_bytes_total{namespace=\"$deployment_namespace\",pod_name=~\"$deployment_name.*\"}[3m]))",
+              "expr": "sum(rate(container_network_transmit_bytes_total{namespace=\"\",pod_name=~\".*\"}[3m])) + sum(rate(container_network_receive_bytes_total{namespace=\"\",pod_name=~\".*\"}[3m]))",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -265,7 +251,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -309,7 +295,7 @@
           },
           "targets": [
             {
-              "expr": "max(kube_deployment_spec_replicas{deployment=\"$deployment_name\",namespace=\"$deployment_namespace\"}) without (instance, pod)",
+              "expr": "max(kube_deployment_spec_replicas{deployment=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "metric": "kube_deployment_spec_replicas",
               "refId": "A",
@@ -336,7 +322,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -380,7 +366,7 @@
           },
           "targets": [
             {
-              "expr": "min(kube_deployment_status_replicas_available{deployment=\"$deployment_name\",namespace=\"$deployment_namespace\"}) without (instance, pod)",
+              "expr": "min(kube_deployment_status_replicas_available{deployment=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -406,7 +392,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -450,7 +436,7 @@
           },
           "targets": [
             {
-              "expr": "max(kube_deployment_status_observed_generation{deployment=\"$deployment_name\",namespace=\"$deployment_namespace\"}) without (instance, pod)",
+              "expr": "max(kube_deployment_status_observed_generation{deployment=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -476,7 +462,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(50, 172, 45, 0.97)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -520,7 +506,7 @@
           },
           "targets": [
             {
-              "expr": "max(kube_deployment_metadata_generation{deployment=\"$deployment_name\",namespace=\"$deployment_namespace\"}) without (instance, pod)",
+              "expr": "max(kube_deployment_metadata_generation{deployment=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "refId": "A",
               "step": 600
@@ -552,7 +538,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "prometheus",
           "editable": true,
           "error": false,
           "fill": 1,
@@ -589,35 +575,35 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "max(kube_deployment_status_replicas{deployment=\"$deployment_name\",namespace=\"$deployment_namespace\"}) without (instance, pod)",
+              "expr": "max(kube_deployment_status_replicas{deployment=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "legendFormat": "current replicas",
               "refId": "A",
               "step": 30
             },
             {
-              "expr": "min(kube_deployment_status_replicas_available{deployment=\"$deployment_name\",namespace=\"$deployment_namespace\"}) without (instance, pod)",
+              "expr": "min(kube_deployment_status_replicas_available{deployment=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "legendFormat": "available",
               "refId": "B",
               "step": 30
             },
             {
-              "expr": "max(kube_deployment_status_replicas_unavailable{deployment=\"$deployment_name\",namespace=\"$deployment_namespace\"}) without (instance, pod)",
+              "expr": "max(kube_deployment_status_replicas_unavailable{deployment=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "legendFormat": "unavailable",
               "refId": "C",
               "step": 30
             },
             {
-              "expr": "min(kube_deployment_status_replicas_updated{deployment=\"$deployment_name\",namespace=\"$deployment_namespace\"}) without (instance, pod)",
+              "expr": "min(kube_deployment_status_replicas_updated{deployment=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "legendFormat": "updated",
               "refId": "D",
               "step": 30
             },
             {
-              "expr": "max(kube_deployment_spec_replicas{deployment=\"$deployment_name\",namespace=\"$deployment_namespace\"}) without (instance, pod)",
+              "expr": "max(kube_deployment_spec_replicas{deployment=\"\",namespace=\"\"}) without (instance, pod)",
               "intervalFactor": 2,
               "legendFormat": "desired",
               "refId": "E",
@@ -667,7 +653,7 @@
       {
         "allValue": ".*",
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "prometheus",
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
@@ -687,14 +673,14 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "prometheus",
         "hide": 0,
         "includeAll": false,
         "label": "Deployment",
         "multi": false,
         "name": "deployment_name",
         "options": [],
-        "query": "label_values(kube_deployment_metadata_generation{namespace=\"$deployment_namespace\"}, deployment)",
+        "query": "label_values(kube_deployment_metadata_generation{namespace=\"\"}, deployment)",
         "refresh": 1,
         "regex": "",
         "sort": 0,
