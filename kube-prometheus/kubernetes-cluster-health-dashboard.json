@@ -31,7 +31,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "prometheus",
+          "datasource": "Prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -112,7 +112,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "prometheus",
+          "datasource": "Prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -188,7 +188,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "prometheus",
+          "datasource": "Prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -264,7 +264,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "prometheus",
+          "datasource": "Prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -350,7 +350,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "prometheus",
+          "datasource": "Prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -426,7 +426,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "prometheus",
+          "datasource": "Prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -502,7 +502,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "prometheus",
+          "datasource": "Prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
@@ -578,7 +578,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "prometheus",
+          "datasource": "Prometheus",
           "editable": true,
           "format": "none",
           "gauge": {
