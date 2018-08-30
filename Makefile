@@ -12,7 +12,7 @@ KUBE_PROMETHEUS_DASHBOARDS += nodes-dashboard.json
 KUBE_PROMETHEUS_DASHBOARDS += pods-dashboard.json
 KUBE_PROMETHEUS_DASHBOARDS += statefulset-dashboard.json
 
-export DS_PROMETHEUS ?= prometheus
+export DS_PROMETHEUS ?= Prometheus
 
 ## Write chamber secrets for agent
 apply:
