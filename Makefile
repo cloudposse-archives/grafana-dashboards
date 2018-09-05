@@ -1,3 +1,8 @@
+BUILD_HARNESS_VERSION ?= 0.10.2
+include $(shell curl --silent -o .build-harness "https://raw.githubusercontent.com/cloudposse/build-harness/$(BUILD_HARNESS_VERSION)/templates/Makefile.build-harness"; echo .build-harness)
+
+export README_DEPS ?= docs/targets.md
+
 export KUBE_PROMETHEUS_VERSION ?= 0.23.2
 export KUBE_PROMETHEUS_BASE_URL ?= https://raw.githubusercontent.com/coreos/prometheus-operator/v$(KUBE_PROMETHEUS_VERSION)/helm/grafana/dashboards/
 
@@ -15,6 +20,7 @@ KUBE_PROMETHEUS_DASHBOARDS += statefulset-dashboard.json
 export NGINX_INGRESS_VERSION ?= 0.19.0
 
 export DS_PROMETHEUS ?= Prometheus
+
 
 import: kube-prometheus/import nginx/import
 	@exit 0
