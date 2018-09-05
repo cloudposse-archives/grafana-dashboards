@@ -5,7 +5,7 @@
 # grafana-dashboards [![Latest Release](https://img.shields.io/github/release/cloudposse/grafana-dashboards.svg)](https://github.com/cloudposse/grafana-dashboards/releases) [![Slack Community](https://slack.cloudposse.com/badge.svg)](https://slack.cloudposse.com)
 
 
-Grafana dashboards imported from open source projects and proccessed to be imported with grafana dashboard provisioner.
+Grafana dashboards fetched from open source projects and prepared to be imported with grafana dashboard provisioner.
 
 
 ---
@@ -25,19 +25,19 @@ It's 100% Open Source and licensed under the [APACHE2](LICENSE).
 
 ## Introduction
 
-Starting from [Grafana 5.0](http://docs.grafana.org/administration/provisioning/#dashboards) there is provisioning
+Starting with [Grafana 5.0](http://docs.grafana.org/administration/provisioning/#dashboards) there is a provisioning
 system that uses config files to create\update dashboards.
 
 [The problem](https://github.com/grafana/grafana/issues/10786) with the provisioner is that it does not support
 dashboards variables.
 
-This project is about workaround for the problem.
-It fetch dashboard files and process them replacing `${DS_PROMETHEUS}` with `Prometheus` value and save it.
+This project is a workaround for the problem.
+It fetches dashboard files and processes them replacing `${DS_PROMETHEUS}` with `Prometheus`, and then saves it.
 
-Processed dashboards files are commited into the repo, so you can provision them by putting the files into grafana
-provisioner dashboards directory. __Required existed prometheus datasource named `Prometheus`__
+Processed dashboards files are committed into the repo, so you can provision them by putting the files into grafana
+provisioner dashboards directory. __Requires existing Prometheus datasource named `Prometheus`__
 
-Current supported dashboards:
+Currently supported dashboards:
 * [kube-prometheus](https://github.com/coreos/prometheus-operator/master/helm/grafana/dashboards/)
 * [nginx-ingress](https://github.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/)
 
@@ -45,7 +45,7 @@ Current supported dashboards:
 ## Quick Start
 
 
-Config grafana provisioner following [instructions](http://docs.grafana.org/administration/provisioning/#dashboards)
+Config Grafana provisioner by following these [instructions](http://docs.grafana.org/administration/provisioning/#dashboards)
 
 Fetch dashboards to the directory
 ```
@@ -74,7 +74,7 @@ Available targets:
 Check out these related projects.
 
 - [Grafana](https://github.com/helm/charts/tree/master/stable/grafana) - Official grafana chart
-- [Helmfiles](https://github.com/cloudposse/helmfiles/blob/master/helmfile.d/0400.kube-prometheus.yaml) - Example provisioning the dashboards with stable grafana chart.
+- [Helmfiles](https://github.com/cloudposse/helmfiles/blob/master/helmfile.d/0400.kube-prometheus.yaml) - Example of provisioning the dashboards with stable grafana chart.
 - [Monochart](https://github.com/cloudposse/charts/tree/master/incubator/monochart) - A declarative helm chart for deploying common types of services on Kubernetes
 
 
@@ -84,7 +84,7 @@ Check out these related projects.
 
 For additional context, refer to some of these links. 
 
-- [Cloud Posse Documentation](https://docs.cloudposse.com) - Complete documentation for the Cloud Posse solution
+- [Cloud Posse Documentation](https://docs.cloudposse.com) - Complete documentation for the Cloud Posse solutions
 
 
 ## Help
