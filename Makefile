@@ -12,13 +12,15 @@ KUBE_PROMETHEUS_DASHBOARDS += nodes-dashboard.json
 KUBE_PROMETHEUS_DASHBOARDS += pods-dashboard.json
 KUBE_PROMETHEUS_DASHBOARDS += statefulset-dashboard.json
 
+export NGINX_INGRESS_VERSION ?= 0.19.0
+
 export DS_PROMETHEUS ?= Prometheus
 
-apply: kube-prometheus/apply nginx/apply
+import: kube-prometheus/import nginx/import
 	@exit 0
 
-## Write chamber secrets for agent
-kube-prometheus/apply:
+## Import kube-prometheus grafana dashboards from coreos/prometheus-operator
+kube-prometheus/import:
 	@mkdir -p ./kube-prometheus
 	@for dashboard_file in $(KUBE_PROMETHEUS_DASHBOARDS) ; do \
 		echo "Fetching kube-prometheus $$dashboard_file version $(KUBE_PROMETHEUS_VERSION)"; \
@@ -26,8 +28,9 @@ kube-prometheus/apply:
 			envsubst '$${DS_PROMETHEUS}' > ./kube-prometheus/$$dashboard_file ; \
 	done
 
-## Write chamber secrets for agent
-nginx/apply:
+## Import nginx ingress grafana dashboards from kubernetes/ingress-nginx
+nginx/import:
 	@mkdir -p ./nginx-ingress
-	@curl -s https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/nginx.yaml | \
+	@echo "Fetching nginx ingress dashboard $(NGINX_INGRESS_VERSION)"
+	@curl -s https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-$(NGINX_INGRESS_VERSION)/deploy/grafana/dashboards/nginx.yaml | \
 		envsubst '$${DS_PROMETHEUS}' > ./nginx-ingress/nginx.json
