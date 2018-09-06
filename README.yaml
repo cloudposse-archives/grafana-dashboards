@@ -1,0 +1,67 @@
+name: "grafana-dashboards"
+# Canonical GitHub repo
+github_repo: "cloudposse/grafana-dashboards"
+# License of this project
+license: "APACHE2"
+# Badges to display
+badges:
+  - name: "Latest Release"
+    image: "https://img.shields.io/github/release/cloudposse/grafana-dashboards.svg"
+    url: "https://github.com/cloudposse/grafana-dashboards/releases"
+  - name: "Slack Community"
+    image: "https://slack.cloudposse.com/badge.svg"
+    url: "https://slack.cloudposse.com"
+
+description: |-
+  Grafana dashboards fetched from open source projects and prepared to be imported with grafana dashboard provisioner.
+
+introduction: |-
+  Starting with [Grafana 5.0](http://docs.grafana.org/administration/provisioning/#dashboards) there is a provisioning
+  system that uses config files to create\update dashboards.
+
+  [The problem](https://github.com/grafana/grafana/issues/10786) with the provisioner is that it does not support
+  dashboards variables.
+
+  This project is a workaround for the problem.
+  It fetches dashboard files and processes them replacing `${DS_PROMETHEUS}` with `Prometheus`, and then saves it.
+
+  Processed dashboards files are committed into the repo, so you can provision them by putting the files into grafana
+  provisioner dashboards directory. __Requires existing Prometheus datasource named `Prometheus`__
+
+  Currently supported dashboards:
+  * [kube-prometheus](https://github.com/coreos/prometheus-operator/master/helm/grafana/dashboards/)
+  * [nginx-ingress](https://github.com/kubernetes/ingress-nginx/master/deploy/grafana/dashboards/)
+
+include:
+  - "docs/targets.md"
+
+quickstart: |-
+
+  Config Grafana provisioner by following these [instructions](http://docs.grafana.org/administration/provisioning/#dashboards)
+
+  Fetch dashboards to the directory
+  ```
+  wget https://raw.githubusercontent.com/cloudposse/grafana-dashboards/feature-kube-prometheus-dashboards/kube-prometheus/deployment-dashboard.json /var/lib/grafana/dashboards
+  ```
+
+related:
+  - name: "Grafana"
+    description: "Official grafana chart"
+    url: "https://github.com/helm/charts/tree/master/stable/grafana"
+
+  - name: "Helmfiles"
+    description: "Example of provisioning the dashboards with stable grafana chart."
+    url: "https://github.com/cloudposse/helmfiles/blob/master/helmfile.d/0400.kube-prometheus.yaml"
+
+  - name: "Monochart"
+    description: "A declarative helm chart for deploying common types of services on Kubernetes"
+    url: "https://github.com/cloudposse/charts/tree/master/incubator/monochart"
+
+references:
+  - name: "Cloud Posse Documentation"
+    description: "Complete documentation for the Cloud Posse solutions"
+    url: "https://docs.cloudposse.com"
+
+contributors:
+  - name: "Igor Rodionov"
+    github: "goruha"
