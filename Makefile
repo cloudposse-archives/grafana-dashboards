@@ -50,6 +50,6 @@ nginx/import:
 ## Import django grafana dashboards for https://github.com/korfuri/django-prometheus
 django/import:
 	@mkdir -p ./django
-	@echo "Fetching django dashboard ID: 3107 (https://grafana.com/dashboards/3107)"
-	@curl -s https://grafana.com/api/dashboards/3107/revisions/2/download | \
-		envsubst '$${DS_PROM}' > ./django/django.json
+	@echo "Fetching django dashboard ID: 7996 (https://grafana.com/dashboards/7996)"
+	@curl -s https://grafana.com/api/dashboards/7996/revisions/2/download | \
+		envsubst '$${DS_PROMETHEUS}' > ./django/django.json
