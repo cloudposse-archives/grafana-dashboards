@@ -19,10 +19,15 @@ KUBE_PROMETHEUS_DASHBOARDS += statefulset-dashboard.json
 
 export NGINX_INGRESS_VERSION ?= 0.19.0
 
+export DJANGO_VERSION ?=
+
 export DS_PROMETHEUS ?= Prometheus
 
+## Name of prometheus datasource for django
+export DS_PROM ?= $(DS_PROMETHEUS)
 
-import: kube-prometheus/import nginx/import
+## Import all dashboards
+import: kube-prometheus/import nginx/import django/import
 	@exit 0
 
 ## Import kube-prometheus grafana dashboards from coreos/prometheus-operator
@@ -40,3 +45,11 @@ nginx/import:
 	@echo "Fetching nginx ingress dashboard $(NGINX_INGRESS_VERSION)"
 	@curl -s https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-$(NGINX_INGRESS_VERSION)/deploy/grafana/dashboards/nginx.yaml | \
 		envsubst '$${DS_PROMETHEUS}' > ./nginx-ingress/nginx.json
+
+
+## Import django grafana dashboards for https://github.com/korfuri/django-prometheus
+django/import:
+	@mkdir -p ./django
+	@echo "Fetching django dashboard ID: 3107 (https://grafana.com/dashboards/3107)"
+	@curl -s https://grafana.com/api/dashboards/3107/revisions/2/download | \
+		envsubst '$${DS_PROM}' > ./django/django.json
