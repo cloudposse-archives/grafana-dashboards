@@ -3,19 +3,10 @@ include $(shell curl --silent -o .build-harness "https://raw.githubusercontent.c
 
 export README_DEPS ?= docs/targets.md
 
-export KUBE_PROMETHEUS_VERSION ?= 0.23.2
-export KUBE_PROMETHEUS_BASE_URL ?= https://raw.githubusercontent.com/coreos/prometheus-operator/v$(KUBE_PROMETHEUS_VERSION)/helm/grafana/dashboards/
+export KUBE_PROMETHEUS_VERSION ?= 0.29.0
+export KUBE_PROMETHEUS_DEFINITION_FILE ?= https://raw.githubusercontent.com/coreos/prometheus-operator/v$(KUBE_PROMETHEUS_VERSION)/contrib/kube-prometheus/manifests/grafana-dashboardDefinitions.yaml
 
-KUBE_PROMETHEUS_DASHBOARDS :=
-KUBE_PROMETHEUS_DASHBOARDS += deployment-dashboard.json
-KUBE_PROMETHEUS_DASHBOARDS += kubernetes-capacity-planning-dashboard.json
-KUBE_PROMETHEUS_DASHBOARDS += kubernetes-cluster-health-dashboard.json
-KUBE_PROMETHEUS_DASHBOARDS += kubernetes-cluster-status-dashboard.json
-KUBE_PROMETHEUS_DASHBOARDS += kubernetes-control-plane-status-dashboard.json
-KUBE_PROMETHEUS_DASHBOARDS += kubernetes-resource-requests-dashboard.json
-KUBE_PROMETHEUS_DASHBOARDS += nodes-dashboard.json
-KUBE_PROMETHEUS_DASHBOARDS += pods-dashboard.json
-KUBE_PROMETHEUS_DASHBOARDS += statefulset-dashboard.json
+KUBE_PROMETHEUS_DEFINITION_FILE_LOCAL ?= /tmp/grafana-dashboardDefinitions.yaml
 
 export NGINX_INGRESS_VERSION ?= 0.19.0
 
@@ -32,12 +23,15 @@ import: kube-prometheus/import nginx/import django/import
 
 ## Import kube-prometheus grafana dashboards from coreos/prometheus-operator
 kube-prometheus/import:
+	@rm -rf ./kube-prometheus
 	@mkdir -p ./kube-prometheus
-	@for dashboard_file in $(KUBE_PROMETHEUS_DASHBOARDS) ; do \
-		echo "Fetching kube-prometheus $$dashboard_file version $(KUBE_PROMETHEUS_VERSION)"; \
-		curl -s $(KUBE_PROMETHEUS_BASE_URL)/$$dashboard_file | jq .dashboard | \
-			envsubst '$${DS_PROMETHEUS}' > ./kube-prometheus/$$dashboard_file ; \
-	done
+	@echo "Fetching kube-prometheus definitions file version $(KUBE_PROMETHEUS_VERSION)";
+	@curl -s -o $(KUBE_PROMETHEUS_DEFINITION_FILE_LOCAL) $(KUBE_PROMETHEUS_DEFINITION_FILE)
+	@yq r $(KUBE_PROMETHEUS_DEFINITION_FILE_LOCAL) -j | jq -cr '.items[].data | keys[]' | xargs -I {} make kube-prometeus/import-file FILE={}
+
+## Create dashboard file from one of sections in KUBE_PROMETHEUS_DEFINITION_FILE (used by kube-prometheus/import target)
+kube-prometeus/import-file:
+	@yq r $(KUBE_PROMETHEUS_DEFINITION_FILE_LOCAL) -j | jq -cr '.items[] | select(.data | has("$(FILE)")) | .data["$(FILE)"]' > ./kube-prometheus/$(FILE)
 
 ## Import nginx ingress grafana dashboards from kubernetes/ingress-nginx
 nginx/import:
