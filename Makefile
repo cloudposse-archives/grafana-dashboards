@@ -68,4 +68,4 @@ kubecost-prometheus/import:
 ## Create dashboard file from one of sections in KUBECOST_VALUES_FILE_LOCAL (used by kubecost-prometheus/import target)
 kubecost-prometeus/import-file:
 	@echo "Processing dashboard: $(FILE)"
-	@yq r $(KUBECOST_VALUES_FILE_LOCAL) -j | jq -cr '.dashboards.default["$(FILE)"].json' | jq > ./kube-prometheus/$(FILE).json
+	@yq r $(KUBECOST_VALUES_FILE_LOCAL) -j | jq -cr '.dashboards.default["$(FILE)"].json' | jq > ./kube-prometheus/$(FILE)-dashboard.json
