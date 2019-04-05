@@ -57,7 +57,7 @@ django/import:
 	@curl -s https://grafana.com/api/dashboards/7996/revisions/2/download | \
 		envsubst '$${DS_PROMETHEUS}' > ./django/django.json
 
-## Import kube-prometheus grafana dashboards from coreos/prometheus-operator
+## Import kubecost grafana dashboards from kubecost/cost-analyzer-helm-chart
 kubecost-prometheus/import:
 	@mkdir -p ./kube-prometheus
 	@echo "Fetching kubecost helmfile values for kubecost tag '$(KUBECOST_TAG)'";
@@ -65,7 +65,7 @@ kubecost-prometheus/import:
 	@yq r $(KUBECOST_VALUES_FILE_LOCAL) -j | jq -cr '.dashboards.default | to_entries[] | select(.value | has("json")).key' | xargs -I {} make kubecost-prometeus/import-file FILE={}
 	@rm $(KUBECOST_VALUES_FILE_LOCAL)
 
-## Create dashboard file from one of sections in KUBE_PROMETHEUS_DEFINITION_FILE (used by kube-prometheus/import target)
+## Create dashboard file from one of sections in KUBECOST_VALUES_FILE_LOCAL (used by kubecost-prometheus/import target)
 kubecost-prometeus/import-file:
 	@echo "Processing dashboard: $(FILE)"
 	@yq r $(KUBECOST_VALUES_FILE_LOCAL) -j | jq -cr '.dashboards.default["$(FILE)"].json' | jq > ./kube-prometheus/$(FILE).json
